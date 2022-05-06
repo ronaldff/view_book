@@ -19,9 +19,21 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <style>
+      #cw-innr-prgrs-bar {
+          position: fixed;
+          top: 0;
+          height: 4px;
+          background-color: #2e39bf;
+          width: 0;
+          z-index: 99999;
+          transition: all linear 0.1s;
+      }
+    </style>
   </head>
 
   <body>
+    <div id="cw-innr-prgrs-bar"></div>
     <div class="modal fade">
       <div class="modal-dialog">
         <a href="#" class="cmd-close"><span class="glyphicon glyphicon-remove"></span></a>
@@ -126,6 +138,16 @@
             'event_callback': function() {}
           });
         });
+      </script>
+      <script>
+        $(document).on("scroll", function(){
+          var pixels = $(document).scrollTop();
+          var pageHeight = $(document).height() - $(window).height();
+          var progress = Math.round(100 * pixels / pageHeight);
+          console.log(progress);
+          
+          $("#cw-innr-prgrs-bar").css("width", progress + "%");
+        })
       </script>
     </div>
   </body>
